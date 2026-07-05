@@ -31,6 +31,14 @@ dependencies {
     "implementation"(libs.cuiProtocol.neoforge)
 }
 
+sourceSets {
+    main {
+        java {
+            exclude("org/enginehub/worldeditcui/fabric/**")
+        }
+    }
+}
+
 val targetJavaVersion: String by project
 
 // Releasing
