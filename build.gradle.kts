@@ -3,14 +3,21 @@ import net.kyori.indra.licenser.spotless.IndraSpotlessLicenserExtension
 
 plugins {
     base
+    alias(libs.plugins.architecturyPlugin) apply false
     alias(libs.plugins.loom) apply false
     alias(libs.plugins.spotless)
     alias(libs.plugins.indra.spotlessLicenser) apply false
 }
 
 allprojects {
+    apply(plugin = "architectury-plugin")
+
     group = "org.enginehub.worldeditcui"
     version = "${rootProject.libs.versions.minecraft.get()}+02+SNAPSHOT"
+
+    extensions.configure(dev.architectury.plugin.ArchitectPluginExtension::class) {
+        minecraft = rootProject.libs.versions.minecraft.get()
+    }
 
     repositories {
         // mirrors:
@@ -22,12 +29,6 @@ allprojects {
             mavenContent {
                 excludeGroup("org.lwjgl") // workaround for lwjgl-freetype
             }
-        }
-        maven(url = "https://maven.terraformersmc.com/releases/") {
-            name = "terraformersmc"
-        }
-        maven(url = "https://repo.viaversion.com/") {
-            name = "viaversion"
         }
     }
 }
@@ -58,10 +59,8 @@ subprojects {
     tasks.named("processResources", ProcessResources::class).configure {
         inputs.property("version", project.version)
 
-        sequenceOf("fabric.mod.json", "META-INF/neoforge.mods.toml").forEach {
-            filesMatching(it) {
-                expand("version" to project.version)
-            }
+        filesMatching("META-INF/neoforge.mods.toml") {
+            expand("version" to project.version)
         }
     }
 

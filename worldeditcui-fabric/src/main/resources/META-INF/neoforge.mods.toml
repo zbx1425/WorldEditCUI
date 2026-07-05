@@ -1,0 +1,33 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "EPL-2.0"
+
+[[mods]]
+modId = "worldeditcui"
+version = "${version}"
+displayName = "WorldEditCUI"
+description = "Client-side user interface for WorldEdit"
+authors = "lahwran, yetanotherx, Mumfrey, TomyLobo, mikroskeem"
+logoFile = "assets/worldeditcui/icon.png"
+displayURL = "https://github.com/EngineHub/WorldEditCUI"
+
+[[dependencies.worldeditcui]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.10,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.worldeditcui]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.worldeditcui]]
+modId = "worldedit"
+type = "optional"
+versionRange = "[7.3.17,)"
+ordering = "AFTER"
+side = "CLIENT"
