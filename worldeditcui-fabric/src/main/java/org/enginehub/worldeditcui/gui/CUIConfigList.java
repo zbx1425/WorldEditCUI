@@ -197,7 +197,7 @@ public class CUIConfigList extends ContainerObjectSelectionList<CUIConfigList.Co
         public ConfigEntry(String tag) {
             this.tag = tag;
 
-            this.resetButton = Button.builder(Component.translatable("controls.reset"), button -> {
+            this.resetButton = Button.builder(Component.translatable("controls.reset"), _ -> {
                 configuration.changeValue(tag, configuration.getDefaultValue(tag));
                 updateFromConfig();
             }).bounds(0, 0, 50, BUTTON_HEIGHT).build();

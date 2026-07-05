@@ -15,12 +15,12 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.neoforged.fml.loading.FMLPaths;
 import org.enginehub.worldeditcui.InitialisationFactory;
 import org.enginehub.worldeditcui.render.ConfiguredColour;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -149,7 +149,7 @@ public final class CUIConfiguration implements InitialisationFactory {
 	}
 
 	private static Path getConfigFile() {
-		return FabricLoader.getInstance().getConfigDir().resolve(CUIConfiguration.CONFIG_FILE_NAME);
+		return FMLPaths.CONFIGDIR.get().resolve(CUIConfiguration.CONFIG_FILE_NAME);
 	}
 
 	public static CUIConfiguration create() {
@@ -228,7 +228,7 @@ public final class CUIConfiguration implements InitialisationFactory {
 		this.initialise();
 	}
 
-	public Object getDefaultValue(String text) {
+	public @Nullable Object getDefaultValue(String text) {
 		return switch (text) {
 			case "debugMode", "promiscuous", "compatibilityRenderer", "clearAllOnKey" -> false;
 			case "cuboidGridColor" -> ConfiguredColour.CUBOIDGRID.getDefault();
